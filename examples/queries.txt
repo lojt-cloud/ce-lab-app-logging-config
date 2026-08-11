@@ -1,0 +1,77 @@
+CloudWatch Logs Insights Queries — ce-lab-app-logging-config
+Log group: /aws/application/api
+
+===============================================================
+1. Find all order_created events
+===============================================================
+Query:
+fields @timestamp, @message
+| filter event = "order_created"
+| sort @timestamp desc
+| limit 20
+
+Result: 1 of 1 matched.
+Returned the single order placed during testing:
+  timestamp: 2026-08-11T08:39:22.000Z
+  correlation_id: 18356d2c-c010-4d96-9eff-675d22140a4f
+  order_id: ord-a1ef184e
+  amount: 99.99
+  items: 3
+  user_id: user-123
+
+
+===============================================================
+2. Calculate average order amount
+===============================================================
+Query:
+fields amount
+| filter event = "order_created"
+| stats avg(amount) as avg_order, count() as total_orders
+
+Result: 1 of 1 matched.
+  avg_order: 99.99
+  total_orders: 1
+(Only one order was placed during load testing, so the average equals that single order's amount.)
+
+
+===============================================================
+3. Count events by type
+===============================================================
+Query:
+fields event
+| stats count() as event_count by event
+| sort event_count desc
+
+Result: 3 of 53 matched (53 total log records grouped into 3 event types).
+  request_received : ~51
+  order_created     : 1
+  health_check      : 1
+(Confirms the traffic mix from testing: one health check, one order, and ~51 GET / requests including the 50-request load loop.)
+
+
+===============================================================
+4. Track requests by correlation ID
+===============================================================
+Query:
+fields @timestamp, event, @message
+| filter correlation_id = "18356d2c-c010-4d96-9eff-675d22140a4f"
+| sort @timestamp asc
+
+Result: 1 of 1 matched.
+Returned the single order_created log line tied to that correlation ID. In a multi-service
+setup, this same pattern would return every log line across all services carrying that ID,
+letting you trace one request end-to-end.
+
+
+===============================================================
+5. Find slow requests (duration_ms > 1000)
+===============================================================
+Query:
+fields @timestamp, path, duration_ms
+| filter duration_ms > 1000
+| sort duration_ms desc
+
+Result: 0 of 0 matched.
+No results — expected, since this version of server.py does not log a duration_ms field.
+Left in as a demonstration of a query pattern for future instrumentation (would require
+adding request timing to the app's log calls).

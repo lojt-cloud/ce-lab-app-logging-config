@@ -1,0 +1,10 @@
+Log Group: /aws/application/api
+Retention: 30 days
+
+Reason: 30 days is enough to debug recent issues and spot short-term trends,
+without keeping data indefinitely and driving up storage cost. Default
+retention (never expire) grows storage cost forever for no added benefit
+in a lab/dev environment.
+
+Set via:
+aws logs put-retention-policy --log-group-name /aws/application/api --retention-in-days 30
