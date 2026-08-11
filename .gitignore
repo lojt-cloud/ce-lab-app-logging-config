@@ -5,3 +5,7 @@
 *.tfstate
 *.tfstate.backup
 .DS_Store
+venv/
+application.log
+__pycache__/
+*.pyc
