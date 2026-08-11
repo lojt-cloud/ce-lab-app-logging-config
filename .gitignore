@@ -1,0 +1,7 @@
+*.rpm
+*.zip
+*.tar.gz
+.terraform/
+*.tfstate
+*.tfstate.backup
+.DS_Store
