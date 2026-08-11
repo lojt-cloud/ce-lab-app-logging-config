@@ -1,0 +1,13 @@
+Log Group Name: /aws/application/api
+Region: us-east-1
+Account ID: 743631836010
+ARN: arn:aws:logs:us-east-1:743631836010:log-group:/aws/application/api
+Log Class: Standard
+Retention: 30 days
+
+Log Stream: i-04aebfed0bc2ce12b (matches EC2 instance ID, from {instance_id} in agent config)
+Source instance: i-04aebfed0bc2ce12b (logging-lab, t3.micro)
+Source file on instance: /home/ec2-user/app/application.log
+
+Created automatically by the CloudWatch agent on first log delivery after
+running amazon-cloudwatch-agent-ctl with -a fetch-config -s.
