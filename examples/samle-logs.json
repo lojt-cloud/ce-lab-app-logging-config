@@ -1,0 +1,42 @@
+[
+  {
+    "port": 5000,
+    "event": "application_started",
+    "timestamp": "2026-08-11T08:37:04.197706Z",
+    "level": "info"
+  },
+  {
+    "correlation_id": "4225c4a7-854b-43f3-9e84-1ddd55cd97d6",
+    "path": "/",
+    "method": "GET",
+    "ip": "127.0.0.1",
+    "event": "request_received",
+    "timestamp": "2026-08-11T08:39:22.115757Z",
+    "level": "info"
+  },
+  {
+    "status": "healthy",
+    "event": "health_check",
+    "timestamp": "2026-08-11T08:39:22.123104Z",
+    "level": "info"
+  },
+  {
+    "correlation_id": "18356d2c-c010-4d96-9eff-675d22140a4f",
+    "order_id": "ord-a1ef184e",
+    "amount": 99.99,
+    "items": 3,
+    "user_id": "user-123",
+    "event": "order_created",
+    "timestamp": "2026-08-11T08:39:22.130115Z",
+    "level": "info"
+  },
+  {
+    "correlation_id": "115c89be-fc59-4e7c-9b91-82bdf9b8c925",
+    "path": "/",
+    "method": "GET",
+    "ip": "127.0.0.1",
+    "event": "request_received",
+    "timestamp": "2026-08-11T08:39:22.146576Z",
+    "level": "info"
+  }
+]
